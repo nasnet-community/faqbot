@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 import asyncio
 from telegram import Message, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -14,8 +15,7 @@ from telegram.ext import (
 
 # Load FAQs from JSON
 def load_faqs():
-    with open("faqs.json", "r") as f:
-        return json.load(f)
+    return requests.get(os.environ.get("FAQ_JSON_URI")).json()
 
 
 FAQS = load_faqs()
